@@ -2,6 +2,8 @@ function post()
 {
   var comment = document.getElementById("message").value;
   var name = document.getElementById("name").value;
+  var item_id = document.getElementById("item_id").value;
+  alert (item_id);
   if(comment && name)
   {
     $.ajax
@@ -11,7 +13,8 @@ function post()
       data: 
       {
          user_comm:comment,
-	       user_name:name
+	       user_name:name,
+         id:item_id,
       },
         cache: false,
       success: function (response) {

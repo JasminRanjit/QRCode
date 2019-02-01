@@ -2,11 +2,11 @@
 
 include('config.php');
 $db=mysqli_select_db($con, $mysql_database);
-$id='1';
-if(isset($_POST['user_comm']) && isset($_POST['user_name']))
+if(isset($_POST['user_comm']) && isset($_POST['user_name']) && isset($_POST['id']))
 {
   $comment=$_POST['user_comm'];
   $name=$_POST['user_name'];
+  $id=$_POST['id'];
   $insert=mysqli_query($con, "INSERT into comments values('','$id','$name','$comment',CURRENT_TIMESTAMP)");
   
   $id=mysqli_insert_id($con);

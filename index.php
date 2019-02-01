@@ -38,7 +38,8 @@
   <body id="page-top">
   <?php  
     include('config.php');
-      $post_id = '1';
+      global $id;
+      $id=$_GET['id'];
   ?>
 
     <!-- Navigation -->
@@ -46,7 +47,6 @@
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
           <?php
-            $id=1;
             $result = mysqli_query($con, "SELECT name FROM items where id='$id'");
             while($row = mysqli_fetch_assoc($result))
             {
@@ -105,20 +105,29 @@
     </nav>
 
     <!-- Header -->
-    <header class="masthead bg-primary text-white text-center" style="height:57em">
+    <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <img id="pr-img" src="img/blue.png" width="50%" height="50%">
+          <div>
+            <?php
+                $result = mysqli_query($con, "SELECT img_url FROM items where id='$id'");
+                echo $row['img_url'];
+                while($row = mysqli_fetch_assoc($result))
+                {
+                    echo '<img id="pr-img"  width="100%" height="100%" src="'.$row['img_url'].'" />';
+                } 
+            ?>
             <div class="rate">
-              <div id="1" class="btn-1 rate-btn"></div>
+              <h5>PRODUCT RATING</h5>
+                  <div id="1" class="btn-1 rate-btn"></div>
                   <div id="2" class="btn-2 rate-btn"></div>
                   <div id="3" class="btn-3 rate-btn"></div>
                   <div id="4" class="btn-4 rate-btn"></div>
                   <div id="5" class="btn-5 rate-btn"></div>
             </div>
-            <br>
+            <br><br>
             <div class="box-result">
               <?php
-                  $query = mysqli_query($con,"SELECT * FROM ratings"); 
+                  $query = mysqli_query($con,"SELECT * FROM ratings WHERE item_id='$id'");
                       while($data = mysqli_fetch_assoc($query)){
                             $rate_db[] = $data;
                             $sum_rates[] = $data['rate'];
@@ -139,8 +148,8 @@
                 <div class="rate-stars"></div>
             </div>
                 <p style="margin:5px 0px; font-size:16px; text-align:center">Rated <strong><?php echo substr($rate_value,0,3); ?></strong> out of <?php echo $rate_times; ?> Review(s)</p>
-            </div>
-                      <p><h5>HEALTH</h5>
+            </div><br>
+                      <p><h5>HEALTH REVIEW</h5>
             <div style="text-align: center;">
               <div id="progressbar" style="display: inline-block;"">
                 <div id="progress">25%</div>
@@ -245,6 +254,7 @@
                     <label>Message</label>
                     <textarea class="form-control" id="message" rows="5" placeholder="Your Feedback" required="required" data-validation-required-message="Please enter a message."></textarea>
                     <p class="help-block text-danger"></p>
+                    <input type="hidden" id="item_id" value="<?php echo $id; ?>">
                   </div>
                 </div>
                 <br>
@@ -267,7 +277,7 @@
               <?php
                 include('config.php');
 
-                $comm = mysqli_query($con, "select name,comment,post_time from comments order by post_time desc");
+                $comm = mysqli_query($con, "select name,comment,post_time from comments where item_id='$id' order by post_time desc");
                 while($row=mysqli_fetch_array($comm))
                 {
                 $name=$row['name'];
