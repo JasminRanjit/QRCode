@@ -6,5 +6,5 @@ Copy the folder qrcode to the xampp folder. This is in C: by default. The folder
 Then, Run Xampp Server and start Apache and MySQL.
 In the browser url box type "localhost/phpmyadmin"
 Import the database named qrcode.sql in the folder qrcode.
-To start the page, in the url box type "localhost/qrcode" or "localhpst/qrcode/index/php" and hit enter.
+To start the page, in the url box type "http://localhost/qrcode/index.php?id=" and enter the id which is the item id. For instance if you want to access the page of Original Blue Cheese whose database id is "0" you have to type http://localhost/qrcode/index.php?id=0. For now only 0 and 1 have data. Then after typing the full url with the id, hit enter to access the product page.
 The customer can rate a product and provide their feedbacks as well. They can also view feedbacks from other users when they scroll down further.
