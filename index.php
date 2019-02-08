@@ -32,6 +32,23 @@
   <script type = "text/javascript" src = "js/post_comments.js" ></script>
   <script type = "text/javascript" src = "js/jquery.js" ></script>
   <script type = "text/javascript" src = "css/progressbar.js" ></script>
+  
+   <script type="text/javascript" src="js/qrcodelib.js"></script>
+        <script type="text/javascript" src="js/webcodecamjs.js"></script>
+        <script type="text/javascript">
+        	var txt = "innerText" in HTMLElement.prototype ? "innerText" : "textContent";
+            var arg = {
+                resultFunction: function(result) {
+                	var aChild = document.createElement('li');
+                	aChild[txt] = result.format + ': ' + result.code;
+                    document.querySelector('body').appendChild(aChild);
+                }
+            };
+            
+            function startScanning(){
+				new WebCodeCamJS("canvas").init(arg).play();
+		   }
+        </script>
 
   </head>
 
@@ -41,7 +58,7 @@
       global $id;
       $id=$_GET['id'];
   ?>
-
+<div id="webcam"></div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
@@ -262,7 +279,11 @@
                 <div class="form-group">
                   <input type="submit" class="btn btn-primary btn-xl" value="Post" id="sendMessageButton">
                 </div>
+                 <div class="form-group">
+                  <input type="button" class="btn btn-primary btn-xl" value="Scan" id="sendMessageButton" onClick="startScanning()">
+                </div>
               </form>
+              <canvas></canvas>
             </div>
           </div>
         </div>
