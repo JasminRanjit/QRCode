@@ -1,6 +1,7 @@
 # qrcode
 QRCode Scanner application that shows a product page when the user uses their camera phone to scan the QRCode in any product.
 
+# Usage
 To view the page follow the instructions below
 
 Copy the folder qrcode to the xampp folder. This is in C: by default. The folder qrcode needs to be inside the htdocs folder which is inside the xampp folder.
